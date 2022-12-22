@@ -40,6 +40,7 @@ export interface iProducts{
     price: number;
     category: string;
     img: string;
+    quantity: number;
 }
 export const UserContext = createContext({} as iUserProviderValue )
 

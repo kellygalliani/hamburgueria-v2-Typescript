@@ -13,14 +13,10 @@ interface iCartProviderValue{
   addToCart: (item: iProducts) => void;
   removeToCart: (itemId: number)=> void;
   cartTotal: number;
+  setCartTotal:React.Dispatch<React.SetStateAction<number>>
 }
-export interface iCartProducts{
-  name: string;
-  id:number;
-  price: number;
-  category: string;
-  img: string;
-}
+export interface iCartProducts extends iProducts{}
+
 export const CartContext = createContext({} as iCartProviderValue )
 
 export const CartProvider = ({children}: iCartContextProps) =>{
@@ -32,7 +28,7 @@ export const CartProvider = ({children}: iCartContextProps) =>{
   function addToCart(item: iProducts){
   
     if(!currentSale.includes(item)){
-      setcurrentSale(()=>[...currentSale, item])
+      setcurrentSale(()=>[...currentSale, {...item, quantity: 1}])
     }
   }
 
@@ -44,7 +40,7 @@ export const CartProvider = ({children}: iCartContextProps) =>{
   function cart_Total(){
     if(currentSale.length > 0){
        const total =  currentSale.reduce((acc, presentValue) =>{
-        return presentValue.price + acc
+        return (presentValue.price * presentValue.quantity) + acc
        }, 0)
        setCartTotal(total)
     }
@@ -55,7 +51,7 @@ export const CartProvider = ({children}: iCartContextProps) =>{
   
       
     return(
-        <CartContext.Provider value={{modalIsOpen,setModaIsOpen, currentSale, setcurrentSale, addToCart, removeToCart, cartTotal}}>
+        <CartContext.Provider value={{modalIsOpen,setModaIsOpen, currentSale, setcurrentSale, addToCart, removeToCart, cartTotal, setCartTotal}}>
           {children}
         </CartContext.Provider>
       )
