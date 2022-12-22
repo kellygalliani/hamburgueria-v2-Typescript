@@ -85,6 +85,7 @@ export const UserProvider = ({children}: iUserContextProps) =>{
         const token = localStorage.getItem("@TOKEN")
         if (!token) {
             setloadingForApi(false)
+            navigate("/")
             return
         }
         if(token){

@@ -18,7 +18,6 @@ export const Main = () => {
         </ul>
       </Container>
     </StyledMain>
-
     </>
   )
 }

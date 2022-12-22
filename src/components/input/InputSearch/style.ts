@@ -18,8 +18,8 @@ export const StyledInputSearchBox = styled.fieldset`
     }
 
     svg{
-        font-weight: 900;
-        font-size: 14px;
+        height: 40%;
+        width: 40%;
         color: #FFFFFF !important;
     }
 

@@ -25,15 +25,14 @@ export const CartContext = createContext({} as iCartProviderValue )
 
 export const CartProvider = ({children}: iCartContextProps) =>{
   const [modalIsOpen, setModaIsOpen] = useState(false)
-  const [currentSale, setcurrentSale] = useState/* <iCartProducts[]> */([] as iCartProducts[])
+  const [currentSale, setcurrentSale] = useState<iCartProducts[]>([])
   const [cartTotal, setCartTotal] = useState(0)
   
-  console.log(currentSale)
- 
+
   function addToCart(item: iProducts){
-    console.log(item)
+  
     if(!currentSale.includes(item)){
-      setcurrentSale([...currentSale, item])
+      setcurrentSale(()=>[...currentSale, item])
     }
   }
 
@@ -50,7 +49,10 @@ export const CartProvider = ({children}: iCartContextProps) =>{
        setCartTotal(total)
     }
   }
-  cart_Total()
+  useEffect(()=>{
+    cart_Total()
+  }, [currentSale])
+  
       
     return(
         <CartContext.Provider value={{modalIsOpen,setModaIsOpen, currentSale, setcurrentSale, addToCart, removeToCart, cartTotal}}>

@@ -7,7 +7,6 @@ export const InputSearch = () => {
   const { userLogout, products,setProducts, filteredProducts, setFilteredProducts } = useContext(UserContext)
   
   function filter(event:React.ChangeEvent<HTMLInputElement>){
-    console.log(event.currentTarget.value)
     const filteredList = products.filter((product) => (product.name.toLowerCase().includes(event.currentTarget.value)))
     setProducts(filteredList)
   } 

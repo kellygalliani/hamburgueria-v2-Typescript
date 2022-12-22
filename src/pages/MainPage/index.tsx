@@ -10,7 +10,7 @@ export const MainPage = () => {
   const { mainPageGetProducts } = useContext (UserContext)
   const { modalIsOpen } = useContext(CartContext)
 
-  useEffect(()=>{
+ useEffect(()=>{
     mainPageGetProducts()
   },[])
 
