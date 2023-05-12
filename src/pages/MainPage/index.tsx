@@ -5,6 +5,7 @@ import { Main } from '../../components/Main';
 import { Modal } from '../../components/Modal';
 import { CartContext } from '../../contexts/CartContext';
 import { UserContext } from '../../contexts/UserContext';
+import { SearchValueProvider } from '../../contexts/SearchValueContext';
 
 export const MainPage = () => {
   const { mainPageGetProducts } = useContext (UserContext)
@@ -16,12 +17,14 @@ export const MainPage = () => {
 
   return (
     <>
-    <Header />
-    <Main/>
-    { modalIsOpen && 
-      <Modal >
-          <Cart/>          
-      </Modal> }   
+      <SearchValueProvider>
+        <Header />
+        <Main/>
+        { modalIsOpen && 
+          <Modal >
+              <Cart/>          
+          </Modal> }   
+      </SearchValueProvider>
     </>
   )
 }
