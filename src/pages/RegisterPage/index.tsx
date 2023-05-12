@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { StyledRegisterPage } from './style'
 import Logo  from '../../images/Logo.svg'
 import iconBag  from '../../images/iconBag.svg'
@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterSchema } from './RegisterSchema'
-import { iApiRegister, UserContext } from '../../contexts/UserContext'
+import { UserContext } from '../../contexts/UserContext'
+import { iApiRegister } from '../../interfaces/UserContextInterfaces'
 
 interface iRegisterFormData{
     name: string;

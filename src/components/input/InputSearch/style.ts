@@ -5,6 +5,11 @@ export const StyledInputSearchBox = styled.fieldset`
     height: 60px;
     flex-direction: column;
     border-radius: 8px;
+
+    :focus-within {
+        outline: 2px solid var(--Grey-300);
+        border: none;
+    }
     
     button{
         width: 53px;
@@ -30,8 +35,8 @@ export const StyledInputSearchBox = styled.fieldset`
         border-radius: 8px;
         padding: 21px 12px;
         
-        :focus{
-            outline-color: var(--Grey-300);
+        :focus {
+            outline: none;
         }
     }
     @media (min-width: 900px){

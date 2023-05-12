@@ -1,22 +1,26 @@
-import React from 'react'
 import { UseFormRegisterReturn, FieldError } from 'react-hook-form/dist/types';
 import { StyledInputBox } from '../style'
-import { StyledFieldError, StyledInput } from './StyledFieldError';
 
-interface iInputBoxProps{
-    label: string;
-    type: "text" | "email" | "password";
-    placeholder: string;
-    register: UseFormRegisterReturn;
-    error?: FieldError;
+
+interface iInputBoxProps {
+  label: string;
+  type: 'text' | 'email' | 'password';
+  placeholder: string;
+  register: UseFormRegisterReturn;
+  error?: FieldError;
 }
 
-export const InputBox = ({label, type, placeholder, register, error}:iInputBoxProps) => {
+export const InputBox = ({
+  label,
+  type,
+  register,
+  error,
+}: iInputBoxProps) => {
   return (
-    <StyledInputBox>
-        <label htmlFor={type}>{label}</label>
-        <StyledInput type={type} placeholder={placeholder} {...register} error={error}/>
-        {error && <StyledFieldError>{error.message}</StyledFieldError>}
+    <StyledInputBox error={error}>
+      <input type={type} {...register} placeholder="placeholder" />
+      <label htmlFor={type}>{label}</label>
+      {error && <span>{error.message}</span>}
     </StyledInputBox>
-  )
-}
+  );
+};

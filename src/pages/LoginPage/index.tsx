@@ -16,7 +16,6 @@ export interface iLoginFormData{
     password: string;
 }
 
-
 export const LoginPage = () => {
     const { apiLogin, loadingForApi } = useContext(UserContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm<iLoginFormData>({
@@ -43,7 +42,7 @@ export const LoginPage = () => {
                 </div>
                 <form onSubmit={handleSubmit(submit)}>
                     <h2>Login</h2>
-                    <div>
+                    <div className='inputBox'>
                         <InputBox type='email' label='E-mail' placeholder='Digite seu e-mail' register={register("email")} error={errors.email}/>
                         <InputBox type='password' label='Senha' placeholder='Digite sua senha' register={register("password")} error={errors.password}/>
                     </div>

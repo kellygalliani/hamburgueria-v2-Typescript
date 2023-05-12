@@ -4,44 +4,9 @@ import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import { iApiRegister, iProducts, iRequestError, iUser, iUserContextProps, iUserProviderValue } from "../interfaces/UserContextInterfaces";
 
-interface iUserContextProps{
-    children: React.ReactNode,
-}
-interface iUserProviderValue{
-    apiRegister:(FormData: iApiRegister) => void;
-    apiLogin:(FormData: iLoginFormData) => void;
-    loadingForApi: boolean;
-    userLogged: iUser | null;
-    userLogout: () => void;
-    products: iProducts[];
-    setProducts: React.Dispatch<React.SetStateAction<iProducts[]>>;
-    filteredProducts:iProducts[];
-    setFilteredProducts:React.Dispatch<React.SetStateAction<iProducts[]>>;
-    mainPageGetProducts: () => Promise<void>;
 
-}
-export interface iApiRegister{
-    name:string;
-    email:string;
-    password:string;
-}
-interface iRequestError{
-    error: string;
-}
-interface iUser{
-    name: string;
-    email: string;
-    id: number;
-}
-export interface iProducts{
-    name: string;
-    id:number;
-    price: number;
-    category: string;
-    img: string;
-    quantity: number;
-}
 export const UserContext = createContext({} as iUserProviderValue )
 
 export const UserProvider = ({children}: iUserContextProps) =>{
@@ -55,7 +20,7 @@ export const UserProvider = ({children}: iUserContextProps) =>{
     const apiRegister = async (FormData:iApiRegister) =>{
         setloadingForApi(true)
         try {
-            const response = await api.post("/users", FormData)
+            await api.post("/users", FormData)
             toast.success("Cadastro efetuado com sucesso")
             navigate("/")
             
@@ -76,8 +41,8 @@ export const UserProvider = ({children}: iUserContextProps) =>{
             setUserLogged(response.data.user)
             
         } catch (error) {
-            const currentError = error as AxiosError<iRequestError>
-            toast.error(/* currentError.response?.data.error */"Algo deu errado!")
+            const currentError = error as AxiosError<string>
+            toast.error(/* currentError.response?.data.error */"E-mail ou senha estão incorretos!")
         } finally{
             setloadingForApi(false)
         }

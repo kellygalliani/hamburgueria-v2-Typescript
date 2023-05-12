@@ -12,6 +12,7 @@ export const StyledMain = styled.main`
         height: fit-content;
         overflow-x: scroll;
         list-style: none;
+        padding-bottom: 15px;
         @media (min-width:979px) {
             gap: 20px;
             display: grid;

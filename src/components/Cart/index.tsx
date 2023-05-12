@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { CartContext, iCartProducts } from '../../contexts/CartContext'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import { StyledButton } from '../styles/Buttons'
 import { StyledCardCart } from './CartCards/style'
 import { StyledCart } from './style'
+import { iCartProducts } from '../../interfaces/CartContextInterfaces'
 
 export const Cart = () => {
  const { currentSale, setcurrentSale, removeToCart, cartTotal, setCartTotal } = useContext(CartContext)
- const [removeItem, setRemoveItem] = useState({} as iCartProducts)
 
  const counterItem = (valor:string, item:iCartProducts)=>{
-    
     if(valor === "+"){
         setCartTotal(cartTotal+item.price)
         const newArray = currentSale.map((element)=>{
@@ -22,23 +21,23 @@ export const Cart = () => {
         setcurrentSale(newArray)
     }
     if(valor === "-"){
-        setCartTotal(cartTotal+item.price)
-        const newArray = currentSale.map((element)=>{
-            if(element.id === item.id){
-                if(element.quantity < 1){
-                  return { ...element, quantity: 1 }
+        setCartTotal(cartTotal-item.price)
+        
+        let newArray = [...currentSale];
+        if (newArray.find(element => element.id === item.id && element.quantity <= 1)) {
+            newArray = newArray.filter(element => element.id !== item.id);
+        } else {
+            newArray = newArray.map((element)=>{
+                if(element.id === item.id){
+                    return { ...element, quantity: element.quantity - 1 }
+                } else {
+                    return element
                 }
-                return { ...element, quantity: element.quantity - 1 }
-            }else{
-                return element
-            }
-        })
-
+            });
+        }
         setcurrentSale(newArray)
     }
  }
-
-
 
   return (
     <StyledCart>
